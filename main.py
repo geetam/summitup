@@ -1,12 +1,12 @@
 from goose import Goose
 import argparse
 
-def proc_word(word, word_count):
-    if word in word_count:
-        word_count[word] += 1
+def proc_word(word, word_score):
+    if word in word_score:
+        word_score[word] += 1
     else:
-        word_count[word] = 0
-    return word_count
+        word_score[word] = 0
+    return word_score
 
 parser = argparse.ArgumentParser()
 parser.add_argument("nout", help = "Number of sentences in the summary")
@@ -37,11 +37,6 @@ for word in uselessfile_cont.split():
         
 uselessfile.close()        
         
-word_count = {}
-
-for word in article.cleaned_text.split():
-   word_count = proc_word(word, word_count)
-     
 sentence_list = article.cleaned_text.split(".")
 sentence_list = [(sentence.rstrip(" \n\"")).lstrip(" \n\"") for sentence in sentence_list ]
 nsent = len(sentence_list)
@@ -53,8 +48,6 @@ for i in range(nsent):
     for word in sentence_list[i].split():
         if word in word_score:
             sc += word_score[word]
-        if word in word_count:
-            sc += word_count[word]
     sent_score.append( (i, sc) )
     
     
