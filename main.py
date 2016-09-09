@@ -1,13 +1,6 @@
 from goose import Goose
 import argparse
 
-
-def proc_word(word, word_score):
-    if word in word_score:
-        word_score[word] += 1
-    else:
-        word_score[word] = 0
-    return word_score
 def proc_word(word, word_count):
     if word in word_count:
         word_count[word] += 1
